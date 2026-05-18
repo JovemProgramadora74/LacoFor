@@ -1,22 +1,15 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace LacoFor;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+///     Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
     public decimal saldoInicial = 1234.00M;
+    private string[] emoticons = { "🐯", "🍊", "💎", "💰", "🍒", "🔔" };
+
 
     public MainWindow()
     {
@@ -26,39 +19,49 @@ public partial class MainWindow : Window
 
     private async void BotaoSorteio_OnClick(object sender, RoutedEventArgs e)
     {
-        var quantidadeTexto = tbQuantidade.Text;
-        int quantidadeSorteios;
-        try
+        if (!int.TryParse(tbQuantidade.Text, out var quantidadeSorteios))
         {
-            quantidadeSorteios = Convert.ToInt32(quantidadeTexto);
-        }
-        catch (FormatException)
-        {
-            MessageBox.Show("Entrada inválida. Coloque apenas numeros de 1 para cima!");
+            MessageBox.Show("Coloque apenas valores númericos!");
             return;
         }
-        catch (OverflowException)
-        {
-            MessageBox.Show("Erro! O numero digitado é maior que o numero suportado!");
-            return;
-        }
-        
+
         // Desabilita o botão
         btnSorteio.IsEnabled = false;
-        
-        if (quantidadeSorteios < 1)
-        {
-            quantidadeSorteios = 1;
-        }
+
+        if (quantidadeSorteios < 1) quantidadeSorteios = 1;
         var sorteador = new Random();
         // contador++ ; contador += 1; contador = contador + 1
-        for (int contador = 0; contador < quantidadeSorteios; contador++)
-        {
+        for (var contador = 0; contador < quantidadeSorteios; contador++)
             if (saldoInicial >= 10)
             {
-                tbResultado.Text = sorteador.Next(0, 40000000).ToString();
                 saldoInicial -= 10M;
                 tbSaldo.Text = $"R$ {saldoInicial}";
+
+                var numeroSorteado = sorteador.Next(40000001);
+
+                if (numeroSorteado == 3)
+                {
+                    tbSlot1.Text = emoticons[0];
+                    tbSlot2.Text = emoticons[0];
+                    tbSlot3.Text = emoticons[0];
+                    saldoInicial += 20M;
+                    tbSaldo.Text = $"R$ {saldoInicial}";
+                }
+                else
+                {
+                    int slot1, slot2, slot3;
+                    do
+                    {
+                        slot1 = sorteador.Next(emoticons.Length);
+                        slot2 = sorteador.Next(emoticons.Length);
+                        slot3 = sorteador.Next(emoticons.Length);
+                    } while (slot1 == slot2 && slot2 == slot3);
+
+                    tbSlot1.Text = emoticons[slot1];
+                    tbSlot2.Text = emoticons[slot2];
+                    tbSlot3.Text = emoticons[slot3];
+                }
+
                 await Task.Delay(1000);
             }
             else
@@ -66,7 +69,7 @@ public partial class MainWindow : Window
                 MessageBox.Show("Você não tem saldo suficiente para realizar o sorteio!");
                 break;
             }
-        }
+
         // Habilita o botão
         btnSorteio.IsEnabled = true;
     }

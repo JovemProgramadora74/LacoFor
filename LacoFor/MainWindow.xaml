@@ -3,18 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LacoFor"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#1E293B">
         <StackPanel Width="580" VerticalAlignment="Center"> <!-- Grupo Principal -->
             <StackPanel Background="#0f172a" Margin="0 0 0 24"> <!-- Grupo Cabeçalho -->
                 <TextBlock Text="Seu saldo" Foreground="#94A3B8" FontWeight="Bold" FontSize="12" Margin="16 16 16 0" />
-                <TextBlock Text="R$ 1600,00" Foreground="#34D399" FontWeight="Bold" FontSize="30" Margin="16 0 16 16" x:Name="tbSaldo" />
+                <TextBlock Text="R$ 1600,00" Foreground="#34D399" FontWeight="Bold" FontSize="30" Margin="16 0 16 16"
+                           x:Name="tbSaldo" />
             </StackPanel>
-            
+
             <StackPanel Background="#0f172a"> <!-- Grupo aposta -->
-                <TextBlock x:Name="tbResultado" Text="0" Foreground="#94A3B8" FontSize="20" Margin="16 16 16 0" />
+                <StackPanel Orientation="Horizontal">
+                    <Border>
+                        <TextBlock Text="❓" x:Name="tbSlot1" Foreground="Aqua" FontSize="32" />
+                    </Border>
+
+                    <Border>
+                        <TextBlock Text="❓" x:Name="tbSlot2" Foreground="Aqua" FontSize="32" />
+                    </Border>
+
+                    <Border>
+                        <TextBlock Text="❓" x:Name="tbSlot3" Foreground="Aqua" FontSize="32" />
+                    </Border>
+                </StackPanel>
+
                 <StackPanel Orientation="Horizontal" Margin="16 0"> <!-- Grupo giros -->
                     <TextBlock Text="Quantidade de Giros: " Foreground="#94A3B8" FontWeight="Bold" FontSize="20" />
                     <TextBox Text="1" FontSize="20" x:Name="tbQuantidade" />
@@ -23,8 +36,9 @@
                     <TextBlock Text="Custo total: " Foreground="#94A3B8" FontWeight="Bold" FontSize="20" />
                     <TextBlock Text="R$ 10,00" Foreground="#94A3B8" FontSize="20" />
                 </StackPanel>
-                
-                <Button Content="Confirmar sorteio" FontSize="20" Width="480" Height="56" Background="#F59E0B" FontWeight="Bold" Margin="0 8 0 16" Click="BotaoSorteio_OnClick" x:Name="btnSorteio"/>
+
+                <Button Content="Confirmar sorteio" FontSize="20" Width="480" Height="56" Background="#F59E0B"
+                        FontWeight="Bold" Margin="0 8 0 16" Click="BotaoSorteio_OnClick" x:Name="btnSorteio" />
             </StackPanel>
         </StackPanel>
     </Grid>
