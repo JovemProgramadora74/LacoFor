@@ -9,12 +9,13 @@ public partial class MainWindow : Window
 {
     public decimal saldoInicial = 1234.00M;
     private string[] emoticons = { "🐯", "🍊", "💎", "💰", "🍒", "🔔" };
-
+    private const decimal custoSorteio = 20.00M;
 
     public MainWindow()
     {
         InitializeComponent();
         tbSaldo.Text = $"R$ {saldoInicial}";
+        tbCusto.Text = $"R$ {custoSorteio}";
     }
 
     private async void BotaoSorteio_OnClick(object sender, RoutedEventArgs e)
@@ -32,9 +33,9 @@ public partial class MainWindow : Window
         var sorteador = new Random();
         // contador++ ; contador += 1; contador = contador + 1
         for (var contador = 0; contador < quantidadeSorteios; contador++)
-            if (saldoInicial >= 10)
+            if (saldoInicial >= custoSorteio)
             {
-                saldoInicial -= 10M;
+                saldoInicial -= custoSorteio;
                 tbSaldo.Text = $"R$ {saldoInicial}";
 
                 var numeroSorteado = sorteador.Next(40000001);
@@ -44,7 +45,7 @@ public partial class MainWindow : Window
                     tbSlot1.Text = emoticons[0];
                     tbSlot2.Text = emoticons[0];
                     tbSlot3.Text = emoticons[0];
-                    saldoInicial += 20M;
+                    saldoInicial += custoSorteio * 2;
                     tbSaldo.Text = $"R$ {saldoInicial}";
                 }
                 else

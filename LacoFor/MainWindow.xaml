@@ -34,7 +34,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="16 0"> <!-- Grupo custo total -->
                     <TextBlock Text="Custo total: " Foreground="#94A3B8" FontWeight="Bold" FontSize="20" />
-                    <TextBlock Text="R$ 10,00" Foreground="#94A3B8" FontSize="20" />
+                    <TextBlock Text="R$ 10,00" Foreground="#94A3B8" FontSize="20" x:Name="tbCusto" />
                 </StackPanel>
 
                 <Button Content="Confirmar sorteio" FontSize="20" Width="480" Height="56" Background="#F59E0B"
