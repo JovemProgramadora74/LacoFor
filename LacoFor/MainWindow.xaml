@@ -30,7 +30,7 @@
 
                 <StackPanel Orientation="Horizontal" Margin="16 0"> <!-- Grupo giros -->
                     <TextBlock Text="Quantidade de Giros: " Foreground="#94A3B8" FontWeight="Bold" FontSize="20" />
-                    <TextBox Text="1" FontSize="20" x:Name="tbQuantidade" />
+                    <TextBox Text="1" FontSize="20" x:Name="tbQuantidade" KeyUp="TbQuantidade_OnKeyUp" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="16 0"> <!-- Grupo custo total -->
                     <TextBlock Text="Custo total: " Foreground="#94A3B8" FontWeight="Bold" FontSize="20" />

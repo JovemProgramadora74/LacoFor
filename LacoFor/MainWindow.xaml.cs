@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace LacoFor;
 
@@ -9,7 +10,7 @@ public partial class MainWindow : Window
 {
     public decimal saldoInicial = 1234.00M;
     private string[] emoticons = { "🐯", "🍊", "💎", "💰", "🍒", "🔔" };
-    private const decimal custoSorteio = 20.00M;
+    private const decimal custoSorteio = 9.99M;
 
     public MainWindow()
     {
@@ -73,5 +74,19 @@ public partial class MainWindow : Window
 
         // Habilita o botão
         btnSorteio.IsEnabled = true;
+    }
+
+    private void TbQuantidade_OnKeyUp(object sender, KeyEventArgs e)
+    {
+        if (!int.TryParse(tbQuantidade.Text, out var quantidadeSorteio) || quantidadeSorteio < 1)
+        {
+            quantidadeSorteio = 1;
+        }
+        
+        // Calculo do custo total
+        decimal custoTotal = quantidadeSorteio * custoSorteio;
+        
+        // Inserir o custoTotal na interface
+        tbCusto.Text = $"R$ {custoTotal}";
     }
 }
